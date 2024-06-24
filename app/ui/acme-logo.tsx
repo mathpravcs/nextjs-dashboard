@@ -1,8 +1,11 @@
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
-import { lusitana } from './fonts';
+import { Lusitana } from 'next/font/google';
 
 
-
+export const lusitana = Lusitana({
+  subsets: ['latin'],
+  weight: ['400' ,'700',]
+});
 export default function AcmeLogo() {
   return (
     <div

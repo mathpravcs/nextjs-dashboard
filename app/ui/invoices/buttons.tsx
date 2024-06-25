@@ -1,6 +1,9 @@
+'use client';
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-
+import { Button } from '../button';
+import {useRouter} from 'next/navigation'
+import {deleteInvoice} from '@/app/lib/actions';
 export function CreateInvoice() {
   return (
     <Link
@@ -14,23 +17,30 @@ export function CreateInvoice() {
 }
 
 export function UpdateInvoice({ id }: { id: string }) {
+
+  const route = useRouter()
+
+  const handleEdit = () => {
+    route.replace(`/dashboard/invoices/${id}/edit`)
+  }
+
   return (
-    <Link
-      href="/dashboard/invoices"
-      className="rounded-md border p-2 hover:bg-gray-100"
-    >
+    <Button onClick={() => handleEdit()} className="rounded-md border p-2 hover:bg-gray-100">
       <PencilIcon className="w-5" />
-    </Link>
+    </Button>
   );
 }
 
+
+ 
 export function DeleteInvoice({ id }: { id: string }) {
+  const deleteInvoiceWithId = deleteInvoice.bind(null, id);
   return (
-    <>
+    <form action={deleteInvoiceWithId}>
       <button className="rounded-md border p-2 hover:bg-gray-100">
         <span className="sr-only">Delete</span>
         <TrashIcon className="w-5" />
       </button>
-    </>
+    </form>
   );
 }
